@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+*.sqlite3
+db.sqlite3
+staticfiles/
+media/
+
+# Node
+node_modules/
+dist/
+*.local
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+*.log
+
+# OS
+Thumbs.db
+Desktop.ini
