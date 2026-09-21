@@ -82,7 +82,18 @@ async function save() {
     resetForm()
     await load()
   } catch (e) {
-    error.value = JSON.stringify(e.response?.data || '保存失败')
+    const data = e.response?.data
+    if (typeof data === 'string') {
+      error.value = data
+    } else if (data?.detail) {
+      error.value = data.detail
+    } else if (data && typeof data === 'object') {
+      error.value = Object.entries(data)
+        .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join('，') : v}`)
+        .join('；')
+    } else {
+      error.value = '保存失败'
+    }
   }
 }
 

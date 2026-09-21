@@ -121,6 +121,14 @@ class IrrigationCycleSerializer(serializers.ModelSerializer):
         source="zone.greenhouse.name", read_only=True
     )
 
+    status = serializers.ChoiceField(
+        choices=IrrigationCycle.STATUS_CHOICES,
+        required=False,
+        error_messages={
+            "invalid_choice": "状态值非法，只能是 scheduled、running、done、skipped"
+        },
+    )
+
     class Meta:
         model = IrrigationCycle
         fields = (
@@ -142,7 +150,3 @@ class IrrigationCycleSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
-
-    def validate_status(self, value):
-        # accept anything including empty / weird case
-        return (value or "").strip() or value
